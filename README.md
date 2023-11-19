@@ -109,6 +109,8 @@ Test statistic: the absolute difference between average protein per recipe inclu
 
 Result: Our test yielded a p-value of .202, with which we fail to reject the null hypothesis. This means that we don't have sufficient evidence to dispute that rating missingness depends on protein in a recipe. Maybe rating missingness depends on a different nutrition fact. Since protein varies a lot less than ingredients like sugar in most recipes, this could've made it difficult to prove anything statistically significant. Now, let's run the same permutation test only with sugar (PDV) per recipe as our independent feature. 
 
+<iframe src="plots/protein_missing_histogram.html" width=800 height=600 frameBorder=0></iframe>
+
 ##### Rating NMAR Test on Sugar
 
 Null hypothesis: the distribution of sugar per recipe <u>without</u> a rating is the **same** as the distribution of the sugar per recipe <u>with</u> a rating <br>
@@ -119,6 +121,21 @@ Test statistic: the absolute difference between average sugar per recipe includi
 
 Result: This permutation test returned a p-value of approximately 0.0, which is certainly below our threshold of 0.05 and thus small enough to reject the null hypothesis. We can now infer that whether or not a recipe has a rating (rating missingness) is dependent on the percent daily value of sugar in the recipe. 
 
+<iframe src="plots/sugar_missing_histogram.html" width=800 height=600 frameBorder=0></iframe>
+
+### IHQ Hypothesis Testing
+
+##### Defining Indications of High Quality (IHQ)
+
+Now, we'd like to return to investigate our initial question. Basically, does a recipe bragging how good it is actually tell you anything about the quality of the recipe itself? We'd like to know if recipes with words related to quality or authenticity have higher ratings. First, we have to put the recipe titles back into the dataframe since we lost them during the groupby. Then we add a boolean column 'best' with True for recipes with some superlative or indication of high quality (IHQ) in the title. Words we deemed as IHQ (or superlative) are as follows: best, most, amazing, yummy, perfect, ultimate, good, love, and authentic. 
+
+##### Permutation Testing
+
+Next, let's run a permutation test to see if recipes with IHQ in the title have a different rating distribution than recipes without. Our null hypothesis for this test is that there is no difference between ratings in recipes with or without IHQ in the title. Our alternative hypothesis is that recipes with such indications have higher ratings than those without. To run this test we'll use, as our test statistic, average ratings of recipes with IHQ minus average ratings of recipes without IHQ.
+
+##### Conclusion
+
+When we run the permutation test (10,000 samples and significance level .05) with ratings as our feature, we get a p value of about 0.1. This is not significant enough to reject the null hypothesis, therefore we can't prove recipes with IHQ have better ratings. We also tried running the same permutation test with other features such as various nutrition facts (calories, fat, sugar, sodium etc.), recipe time in minutes, number of steps and number of ingredients. None had a p-value less than .09. This means that although we noticed some subtle trends of IHQ recipes having higher ratings and fewer steps, we can not say with any statistical significance that IHQ recipes are any different from other recipes in terms of the features we have available. Using this knowledge, we argue that reading recipe titles with any IHQ in them doesn't reveal anything about the quality of the recipe itself.
 
 
 
