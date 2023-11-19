@@ -139,7 +139,7 @@ Next, let's run a permutation test to see if recipes with IHQ in the title have 
 
 ##### Conclusion
 
-When we run the permutation test (10,000 samples and significance level .05) with ratings as our feature, we get a p value of about 0.1. This is not significant enough to reject the null hypothesis, therefore we can't prove recipes with IHQ have better ratings. We also tried running the same permutation test with other features such as various nutrition facts (calories, fat, sugar, sodium etc.), recipe time in minutes, number of steps and number of ingredients. None had a p-value less than .09. This means that although we noticed some subtle trends of IHQ recipes having higher ratings and fewer steps, we can not say with any statistical significance that IHQ recipes are any different from other recipes in terms of the features we have available. Using this knowledge, we argue that reading recipe titles with any IHQ in them doesn't reveal anything about the quality of the recipe itself.
+When we run the permutation test (10,000 samples and significance level .05) with ratings as our feature, we get a p value of about 0.1. This is not significant enough to reject the null hypothesis, therefore we can't prove recipes with IHQ have better ratings. This means that although we noticed some subtle trends of IHQ recipes having higher ratings, we can not say with any statistical significance that IHQ recipes are any different in terms of publicly judged quality than other recipes. Using this knowledge, we argue that **reading recipe titles with any IHQ in them doesn't reveal anything about the quality of the recipe itself.**
 
 
 
