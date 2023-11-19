@@ -92,24 +92,12 @@ Again, as you can see, the number of recipes per year in the dataset has greatly
 ### Assessment of Rating Missingness
 There are 2 columns with more than 1 missing value, and the only column that's missing more than 100 values is the rating column. The rows that are missing rating are recipes that never got a comment/rating. Although we could easily argue that rating missingness is dependent on the number of comments (missing at random), we want to investigate further. Are there other features in our dataset that could influence the missingness of ratings? Specifically, is rating missingness dependent on nutrition? Perhaps recipes that are designed based on certain nutrition are less popular. This is reasonable since people often cook without thinking about nutrition facts like protein. Let's see if missingness of the recipe ratings depends on the percent daily value of protein in a recipe. We first take a look at a few columns of the data aggregated by rating missingess.
 
-| rating_missing   |   minutes |   calories |   sugar (PDV) |   protein (PDV) |
-|:-----------------|----------:|-----------:|--------------:|----------------:|
-| False            |   115.032 |    429.922 |       68.6651 |         33.1326 |
-| True             |    45     |    886.9   |       10      |         96      |
+| rating_missing   |   n_steps |   n_ingredients |   total fat (PDV) |   sugar (PDV) |
+|:-----------------|----------:|----------------:|------------------:|--------------:|
+| False            |   10.1055 |         9.21407 |           32.6247 |       68.6651 |
+| True             |    6      |         5       |           91      |       10      |
 
 In order to test this theory, we will run a permutation test with 10,000 trials and a p-value of .05. If less than 5% of the trials in the permutation test contain test statistics equal to or greater than the observed test statistic, we can reject the null hypothesis.
-
-##### Rating NMAR Test on Protein
-
-Null hypothesis: the distribution of protein per recipe <u>without</u> a rating is the **same** as the distribution of the protein per recipe <u>with</u> a rating <br>
-
-Alternative hypothesis: the distribution of protein per recipe <u>without</u> a rating is the **different** from the distribution of the protein per recipe <u>with</u> a rating <br>
-
-Test statistic: the absolute difference between average protein per recipe including rating and protein per recipe missing rating.
-
-Result: Our test yielded a p-value of .202, with which we fail to reject the null hypothesis. This means that we don't have sufficient evidence to dispute that rating missingness depends on protein in a recipe. Maybe rating missingness depends on a different nutrition fact. Since protein varies a lot less than ingredients like sugar in most recipes, this could've made it difficult to prove anything statistically significant. Now, let's run the same permutation test only with sugar (PDV) per recipe as our independent feature. 
-
-<iframe src="plots/protein_missing_histogram.html" width=800 height=600 frameBorder=0></iframe>
 
 ##### Rating NMAR Test on Sugar
 
@@ -119,9 +107,23 @@ Alternative hypothesis: the distribution of sugar per recipe <u>without</u> a ra
 
 Test statistic: the absolute difference between average sugar per recipe including rating and sugar per recipe missing rating.
 
-Result: This permutation test returned a p-value of approximately 0.0, which is certainly below our threshold of 0.05 and thus small enough to reject the null hypothesis. We can now infer that whether or not a recipe has a rating (rating missingness) is dependent on the percent daily value of sugar in the recipe. 
+Result: Our test yielded a p-value of .4023, with which we fail to reject the null hypothesis. This means that we don't have sufficient evidence to dispute that rating missingness depends on sugar in a recipe. Maybe rating missingness depends not on any specific nutrition fact, but rather the number of ingredients themselves. Let's instead investigate if rating missingness depends on the number ingredients in each recipe. We could hypothesize that ratings with lots of ingredients are so complicated that they get very little attention. Perhaps recipes with few ingredients are simpler and so appeal to a wider audience, therefore almost guaranteeing the presence of comments and ratings.
 
 <iframe src="plots/sugar_missing_histogram.html" width=800 height=600 frameBorder=0></iframe>
+
+##### Rating NMAR Test on Number of Ingredients
+
+Null hypothesis: the distribution of the number of ingredients per recipe <u>without</u> a rating is the **same** as the distribution of the number of ingredients per recipe <u>with</u> a rating <br>
+
+Alternative hypothesis: the distribution of the number of ingredients per recipe <u>without</u> a rating is the **different** as the distribution of the number of ingredients per recipe <u>with</u> a rating <br>
+
+Test statistic: the absolute difference between average number of ingredients per recipe including rating and number of ingredients per recipe missing rating.
+
+Result: This permutation test returned a p-value of approximately 0.0, which is certainly below our threshold of 0.298 and thus not nearly small enough to reject the null hypothesis. We can now infer that whether or not a recipe has a rating (rating missingness) is dependent on the number of ingredients in the recipe. 
+
+<iframe src="plots/ingredients_missing_histogram.html" width=800 height=600 frameBorder=0></iframe>
+
+
 
 ### IHQ Hypothesis Testing
 
