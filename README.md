@@ -55,7 +55,7 @@ Originally, it would've been insightful to analyze a boxchart instead of histogr
 
 
 ##### Rating vs Number of Steps in Recipe
-We can see many recipes along the integer intervals of the x axis since many recipes only have one or a couple reviews that are all the same. There is also a slight upward trend.
+We can see many recipes along the integer intervals of the x axis since many recipes only have one or a couple reviews that are all the same. There is also a slight upward trend, indicating that 
 <iframe src="plots/scatter_nsteps_rating.html" width=800 height=600 frameBorder=0></iframe>
 
 ##### Rating vs Number of Calories in Recipe
@@ -92,7 +92,7 @@ Again, as you can see, the number of recipes per year in the dataset has greatly
 
 
 ### Assessment of Rating Missingness
-There are 2 columns with more than 1 missing value, and the only column that's missing more than 100 values is the rating column. The rows that are missing rating are recipes that never got a comment/rating. Although we could easily argue that rating missingness is dependent on the number of comments (missing at random), we want to investigate further. Are there other features in our dataset that could influence the missingness of ratings? Specifically, is rating missingness dependent on nutrition? Perhaps recipes that are designed based on certain nutrition are less popular. This is reasonable since people often cook without thinking about nutrition facts like protein. Let's see if missingness of the recipe ratings depends on the percent daily value of protein in a recipe. We first take a look at a few columns of the data aggregated by rating missingess.
+There are 3 columns with missing values, and the column that's missing the most values is the rating column. The rows that are missing rating are recipes that never got a comment/rating. Although we could easily argue that rating missingness is dependent on the number of comments (missing at random), we want to investigate further. Are there other features in our dataset that could influence the missingness of ratings? Specifically, is rating missingness dependent on nutrition? Perhaps recipes that are designed based on certain nutrition are less popular. This is reasonable since people often cook without thinking about nutrition facts like protein. Let's see if missingness of the recipe ratings depends on the percent daily value of protein in a recipe. We first take a look at a few columns of the data aggregated by rating missingess.
 
 | rating_missing   |   n_steps |   n_ingredients |   total fat (PDV) |   sugar (PDV) |
 |:-----------------|----------:|----------------:|------------------:|--------------:|
@@ -136,6 +136,8 @@ Now, we'd like to return to investigate our initial question. Basically, does a 
 ##### Permutation Testing
 
 Next, let's run a permutation test to see if recipes with IHQ in the title have a different rating distribution than recipes without. Our null hypothesis for this test is that there is no difference between ratings in recipes with or without IHQ in the title. Our alternative hypothesis is that recipes with such indications have higher ratings than those without. To run this test we'll use, as our test statistic, average ratings of recipes with IHQ minus average ratings of recipes without IHQ.
+
+<iframe src="plots/best_rating_histogram.html" width=800 height=600 frameBorder=0></iframe>
 
 ##### Conclusion
 
