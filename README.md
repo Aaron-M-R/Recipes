@@ -1,5 +1,7 @@
 # Are 'Best' Recipes Really the Best?
 
+Written by Aaron Rasin
+
 ### Introduction
 
 Cooking recipes have been around for thousands of years, passed down from generations, and an important part of all cultures worldwide. Almost a quarter into the 21st century, there are so many recipes on the internet it's now impossible to decide what to use. Without the famous chefs' cookbooks of the past, most people are left to their own devices to investigate a recipe before trying it. **But how do we know which recipes to trust?**
