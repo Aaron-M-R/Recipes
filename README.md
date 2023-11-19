@@ -107,7 +107,7 @@ Alternative hypothesis: the distribution of sugar per recipe <u>without</u> a ra
 
 Test statistic: the absolute difference between average sugar per recipe including rating and sugar per recipe missing rating.
 
-Result: Our test yielded a p-value of .4023, with which we fail to reject the null hypothesis. This means that we don't have sufficient evidence to dispute that rating missingness depends on sugar in a recipe. Maybe rating missingness depends not on any specific nutrition fact, but rather the number of ingredients themselves. Let's instead investigate if rating missingness depends on the number ingredients in each recipe. We could hypothesize that ratings with lots of ingredients are so complicated that they get very little attention. Perhaps recipes with few ingredients are simpler and so appeal to a wider audience, therefore almost guaranteeing the presence of comments and ratings.
+Result: Our test yielded a p-value of .4023, with which we fail to reject the null hypothesis. This means that we don't have sufficient evidence to dispute that rating missingness depends on sugar in a recipe. Maybe rating missingness depends not on any specific nutrition fact, but rather on the number of ingredients themselves. Let's instead investigate if rating missingness depends on the number ingredients in each recipe. We could reason that ratings with lots of ingredients are so complicated that they get very little attention. Perhaps recipes with few ingredients are simpler and so appeal to a wider audience, therefore almost guaranteeing the presence of comments and ratings.
 
 <iframe src="plots/sugar_missing_histogram.html" width=800 height=600 frameBorder=0></iframe>
 
@@ -119,7 +119,7 @@ Alternative hypothesis: the distribution of the number of ingredients per recipe
 
 Test statistic: the absolute difference between average number of ingredients per recipe including rating and number of ingredients per recipe missing rating.
 
-Result: This permutation test returned a p-value of approximately 0.0298, which is certainly below our threshold of 0.05 and thus not nearly small enough to reject the null hypothesis. We can now infer that whether or not a recipe has a rating (rating missingness) is dependent on the number of ingredients in the recipe. 
+Result: This permutation test returned a p-value of approximately 0.0298, which is certainly below our threshold of 0.05 and thus small enough to reject the null hypothesis. We can now infer that whether or not a recipe has a rating (rating missingness) is dependent on the number of ingredients in the recipe. 
 
 <iframe src="plots/ingredients_missing_histogram.html" width=800 height=600 frameBorder=0></iframe>
 
