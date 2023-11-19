@@ -109,21 +109,21 @@ Alternative hypothesis: the distribution of sugar per recipe <u>without</u> a ra
 
 Test statistic: the absolute difference between average sugar per recipe including rating and sugar per recipe missing rating.
 
-Result: Our test yielded a p-value of .4023, with which we fail to reject the null hypothesis. This means that we don't have sufficient evidence to dispute that rating missingness depends on sugar in a recipe. Maybe rating missingness depends not on any specific nutrition fact, but rather on the number of ingredients themselves. Let's instead investigate if rating missingness depends on the number ingredients in each recipe. We could reason that ratings with lots of ingredients are so complicated that they get very little attention. Perhaps recipes with few ingredients are simpler and so appeal to a wider audience, therefore almost guaranteeing the presence of comments and ratings.
+Result: Our test yielded a p-value of .4023, with which we fail to reject the null hypothesis. This means that we don't have sufficient evidence to dispute that rating missingness depends on sugar in a recipe. Instead, let's look at other nutrition facts that probably vary more between recipes. We could reason that while differing amounts of sugar in a recipe don't determine rating missingness, differing amounts of fat do. This might be because while high sugar in a recipe doesn't deter people from trying and rating recipes, high fat might. Especially given the recent efforts in recipes to find low fat alternatives, recipes with high fat are receiving fewer ratings. 
 
 <iframe src="plots/sugar_missing_histogram.html" width=800 height=600 frameBorder=0></iframe>
 
-##### Rating NMAR Test on Number of Ingredients
+##### Rating NMAR Test on Fat Content (PDV)
 
-Null hypothesis: the distribution of the number of ingredients per recipe <u>without</u> a rating is the **same** as the distribution of the number of ingredients per recipe <u>with</u> a rating <br>
+Null hypothesis: the distribution of the fat per recipe <u>without</u> a rating is the **same** as the distribution of the fat per recipe <u>with</u> a rating <br>
 
-Alternative hypothesis: the distribution of the number of ingredients per recipe <u>without</u> a rating is the **different** as the distribution of the number of ingredients per recipe <u>with</u> a rating <br>
+Alternative hypothesis: the distribution of the fat per recipe <u>without</u> a rating is the **different** as the distribution of the fat per recipe <u>with</u> a rating <br>
 
-Test statistic: the absolute difference between average number of ingredients per recipe including rating and number of ingredients per recipe missing rating.
+Test statistic: the absolute difference between fat content (PDV) per recipe including rating and fat content per recipe missing rating.
 
-Result: This permutation test returned a p-value of approximately 0.0298, which is certainly below our threshold of 0.05 and thus small enough to reject the null hypothesis. We can now infer that whether or not a recipe has a rating (rating missingness) is dependent on the number of ingredients in the recipe. 
+Result: This permutation test returned a p-value of approximately 0.0479, which is certainly below our threshold of 0.05 and thus small enough to reject the null hypothesis. We can now infer that whether or not a recipe has a rating (rating missingness) is dependent on the fat content of the recipe. 
 
-<iframe src="plots/ingredients_missing_histogram.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="plots/fat_missing_histogram.html" width=800 height=600 frameBorder=0></iframe>
 
 
 
