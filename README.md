@@ -1,6 +1,6 @@
 # Are 'Best' Recipes Really the Best?
 
-Written by Aaron Rasin
+Written by Aaron Rasin as part of a project for DSC80 at the University of California San Diego
 
 ### Introduction
 
@@ -106,7 +106,7 @@ It's immediately apparent that calories and sugar have very different average va
 
 Null hypothesis: the distribution of protein per recipe <u>without</u> a rating is the **same** as the distribution of the protein per recipe <u>with</u> a rating <br>
 
-Alternative hypothesis: the distribution of protein per recipe <u>without</u> a rating is the **different** from the distribution of the protein per recipe <u>with</u> a rating <br>
+Alternative hypothesis: the distribution of protein per recipe <u>without</u> a rating is **different** from the distribution of the protein per recipe <u>with</u> a rating <br>
 
 Test statistic: the absolute difference between average protein per recipe including rating and protein per recipe missing rating.
 
@@ -118,7 +118,7 @@ Result: Our test yielded a p-value of 0.1988, with which we fail to reject the n
 
 Null hypothesis: the distribution of the fat per recipe <u>without</u> a rating is the **same** as the distribution of the fat per recipe <u>with</u> a rating <br>
 
-Alternative hypothesis: the distribution of the fat per recipe <u>without</u> a rating is the **different** as the distribution of the fat per recipe <u>with</u> a rating <br>
+Alternative hypothesis: the distribution of the fat per recipe <u>without</u> a rating is **different** from the distribution of the fat per recipe <u>with</u> a rating <br>
 
 Test statistic: the absolute difference between fat content (PDV) per recipe including rating and fat content per recipe missing rating.
 
