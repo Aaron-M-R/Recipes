@@ -26,7 +26,7 @@ We first clean the data and extract the relevant information. This involves merg
 | midori poached pears                  |        25 | 2008-01-01    | [386.9, 0.0, 347.0, 0.0, 1.0, 0.0, 33.0]     |         8 |               9 |        5 |
 
 ##### Data Extraction
-Now that we have our single DataFrame, let's make the features of interest easily accessible. First, notice that the dates in the date column are strings, which is tedious to perform operations on. Instead, we convert all of the dates from string to datetime which makes them much easier to deal with later. Second, we also notice that columns like tags, nutrition, steps and ingredients look like lists, but are actually strings. This is also quite annoying to use in data analysis, so we convert those strings to lists in order to access their items easier. Since we know we'll want to investigate nutrition later, we separate each item in the list of nutrition facts into its own column, where each value is a float. Let's look at what the nutrition columns look like.
+Now that we have our single DataFrame, let's make the features of interest easily accessible. First, we notice that the dates in the date column are strings, which is tedious to perform operations on. Instead, we convert all of the dates from string to datetime which makes them much easier to deal with later. Second, we also notice that the nutrition column is a list of unlabeled nutrition facts. This is also quite bothersome to use in data analysis. Since we know we'll want to investigate nutrition later, we separate each item in the list of nutrition facts into its own column, where each value is a float. Let's look at what the nutrition columns look like after extraction.
 
 |   calories |   total fat (PDV) |   sugar (PDV) |   sodium (PDV) |   protein (PDV) |   saturated fat (PDV) |   carbohydrates (PDV) |
 |-----------:|------------------:|--------------:|---------------:|----------------:|----------------------:|----------------------:|
@@ -68,6 +68,20 @@ We can see many recipes along the integer intervals of the x axis since many rec
 Let's see how ratings have changed over the years the get a better sense of any time-related trends. Before analyzing the minutes per recipe, we first get rid of outliers. We define outliers as recipes that take more than 24 hours to make (less than 1% of all recipes). We initially look at a scatterplot of recipe minutes over time. This plot reveals not only that the number of recipes has decreased over time, but it looks as if the average minutes of the recipes also decreases over time. Notice the horizontal lines in the scatterplot, which is due to recipes rounding the number of minutes of their recipe to the nearest group of 10 or 30 minutes. The table below the plot shows that the number of recipes per year in fact decreases dramatically from 2008 to 2018.
 <iframe src="plots/scatter_minutes_date.html" width=800 height=600 frameBorder=0></iframe>
 
+|   Year |   Minutes |   Recipes per Year |
+|-------:|----------:|-------------------:|
+|   2008 |  103.785  |              30745 |
+|   2009 |   92.8825 |              22547 |
+|   2010 |  126.525  |              11902 |
+|   2011 |  235.983  |               7573 |
+|   2012 |   99.6509 |               5187 |
+|   2013 |   79.1229 |               3792 |
+|   2014 |  112.65   |               1049 |
+|   2015 |   99.6013 |                306 |
+|   2016 |  199.51   |                204 |
+|   2017 |  101.913  |                288 |
+|   2018 |  125.894  |                189 |
+
 ##### Average Recipe Minutes per Year
 print(aggregated.to_markdown(index=True))
 Again, as you can see, the number of recipes per year in the dataset has greatly decreased since 2008. This is a little odd because overall production of content on the internet has grown over time. Perhaps the data somehow doesn't include all of the recipes. Before we investigate missingness, let's continue with aggregation investigation. When we aggregate the data by year, then a very different pattern emerges. Instead of a slow descent of recipe times over the years, we see most years have an average recipe time of 100 minutes except two years. This interesting aggregation shows that 2011 and 2016 were years with much higher average recipe times than any of their neighbors. Needless to say, the patterns of recipe times are hard to describe and even more difficult to predict.
@@ -76,7 +90,12 @@ Again, as you can see, the number of recipes per year in the dataset has greatly
 
 
 ### Assessment of Rating Missingness
-There are 2 columns with more than 1 missing value, and the only column that's missing more than 100 values is the rating column. The rows that are missing rating are recipes that never got a comment/rating. Although we could easily argue that rating missingness is dependent on the number of comments (missing at random), we want to investigate further. Are there other features in our dataset that could influence the missingness of ratings? Specifically, is rating missingness dependent on nutrition? Perhaps recipes that are designed based on certain nutrition are less popular. This is reasonable since people often cook without thinking about nutrition facts like protein. Let's see if missingness of the recipe ratings depends on the percent daily value of protein in a recipe.
+There are 2 columns with more than 1 missing value, and the only column that's missing more than 100 values is the rating column. The rows that are missing rating are recipes that never got a comment/rating. Although we could easily argue that rating missingness is dependent on the number of comments (missing at random), we want to investigate further. Are there other features in our dataset that could influence the missingness of ratings? Specifically, is rating missingness dependent on nutrition? Perhaps recipes that are designed based on certain nutrition are less popular. This is reasonable since people often cook without thinking about nutrition facts like protein. Let's see if missingness of the recipe ratings depends on the percent daily value of protein in a recipe. We first take a look at a few columns of the data aggregated by rating missingess.
+
+| rating_missing   |   minutes |   calories |   sugar (PDV) |   protein (PDV) |
+|:-----------------|----------:|-----------:|--------------:|----------------:|
+| False            |   115.032 |    429.922 |       68.6651 |         33.1326 |
+| True             |    45     |    886.9   |       10      |         96      |
 
 In order to test this theory, we will run a permutation test with 10,000 trials and a p-value of .05. If less than 5% of the trials in the permutation test contain test statistics equal to or greater than the observed test statistic, we can reject the null hypothesis.
 
