@@ -122,7 +122,7 @@ Alternative hypothesis: the distribution of the fat per recipe <u>without</u> a 
 
 Test statistic: the absolute difference between fat content (PDV) per recipe including rating and fat content per recipe missing rating.
 
-Result: This permutation test returned a p-value of approximately 0.0, which is certainly below our threshold of 0.05 and thus small enough to reject the null hypothesis. We can now infer that whether or not a recipe has a rating (rating missingness) is dependent on the fat content of the recipe. 
+Result: This permutation test returned a p-value of approximately 0.0, which is certainly below our threshold of 0.05 and thus small enough to reject the null hypothesis. We can now infer that whether or not a recipe has a rating (rating missingness) is dependent on the fat content of the recipe. We declare that recipe rating is NMAR, since it is dependent on percent daily value of fat in the recipe.
 
 <iframe src="plots/fat_missing_histogram.html" width=800 height=600 frameBorder=0></iframe>
 
